@@ -1,0 +1,793 @@
+\documentclass[dvipdfmx,tombo,<%= ENV['ONESIDE'] ? @documentclassoption.gsub('twoside', 'oneside') : @documentclassoption%>]{<%= @documentclass %>}
+\usepackage[deluxe,uplatex,jis2004]{otf}
+\usepackage[prefercjkvar]{pxcjkcat}
+\usepackage[T1]{fontenc}
+\usepackage[dvipdfmx,hiresbb]{graphicx}
+\usepackage[dvipdfmx,table]{xcolor}
+\usepackage{framed}
+\usepackage{wrapfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{ascmac}
+\usepackage{float}
+\usepackage{alltt}
+\usepackage{amsmath}
+\usepackage{okumacro}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{jumoline}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{exscale}
+\usepackage{mathpazo}
+\renewcommand{\ttdefault}{lmtt}
+%%\usepackage[scaled]{helvet}
+\usepackage{helvet}
+\usepackage{cases}
+\usepackage{tikz}
+%%\usepackage{diagbox}
+\usepackage{fancyhdr}
+\usepackage{color}
+%%\usepackage{pxpgfmark}
+\usepackage{afterpage}
+\usepackage{ifoddpage}
+
+%% Base: http://oversleptabit.com/?p=453
+\newcounter{marginparcnt}[chapter]
+\newcommand{\theMarginparcnt}{$\dagger$\arabic{marginparcnt}}
+\newcommand{\Marginpar}[1]{%
+  \stepcounter{marginparcnt}%
+  \textsuperscript{\theMarginparcnt}%
+  \protect\marginpar{\footnotesize%
+    \makebox[2zw][l]{\theMarginparcnt}{#1}\par}}
+
+\newcommand{\myleftmargin}{15truemm}
+\setlength{\textwidth}{36zw}
+\setlength{\marginparwidth}{10.4zw}  % 13zw * 0.8 = 10.4zw
+\setlength{\marginparsep}{2zw}
+\setlength{\marginparpush}{1zw}
+\setlength{\oddsidemargin}{\myleftmargin} % ノド
+\setlength{\evensidemargin}{\paperwidth}
+\setlength{\topmargin}{0pt}
+\setlength{\textheight}{62\baselineskip}
+\addtolength{\textheight}{\topskip}
+\iftombow
+  \addtolength{\oddsidemargin}{-1in}
+  \addtolength{\evensidemargin}{-2in}
+  \addtolength{\topmargin}{-1in}
+\else
+  \addtolength{\oddsidemargin}{-1truein}
+  \addtolength{\evensidemargin}{-2truein}
+  \addtolength{\topmargin}{-1truein}
+\fi
+\addtolength{\evensidemargin}{-\textwidth}
+\addtolength{\evensidemargin}{-\oddsidemargin}
+
+\renewcommand{\footnote}[1]{\Marginpar{#1}}
+\renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
+
+\definecolor{yuruyuriblack}{gray}{0.85}
+\definecolor{yuruyuriblackblack}{gray}{0.25}
+\definecolor{shadecolor}{gray}{0.9}
+\definecolor{shadecolorb}{gray}{0.1}
+\definecolor{reviewgreen}{rgb}{0,0.4,0}
+\definecolor{reviewblue}{rgb}{0.2,0.2,0.4}
+\definecolor{reviewred}{rgb}{0.7,0,0}
+\definecolor{reviewdarkred}{rgb}{0.3,0,0}
+
+\newcounter{reverseflg}
+\setcounter{reverseflg}{0}
+\newcounter{frontmainback}
+\setcounter{frontmainback}{0}
+\newcounter{chapterflg}
+\setcounter{chapterflg}{0}
+\newcommand{\authorname}{}
+\newcommand{\setauthorname}[1]{\renewcommand{\authorname}{#1~著}}
+
+\pagestyle{fancy}
+\setlength{\headwidth}{\textwidth}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+
+\newcommand{\myheadheight}{3\baselineskip}
+\setlength{\headheight}{\myheadheight}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter~#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}{}}
+\renewcommand{\headrulewidth}{0pt}
+%%\fancyhf{}
+\lhead{\gtfamily\sffamily\bfseries\upshape \leftmark}
+\chead{}
+\rhead{\gtfamily\sffamily\bfseries\upshape \rightmark}
+
+\newlength{\headloffset}
+\setlength{\headloffset}{\myleftmargin}
+\addtolength{\headloffset}{3truemm}
+
+\newlength{\headboxwidth}
+\setlength{\headboxwidth}{\paperwidth}
+\addtolength{\headboxwidth}{4truemm}
+\addtolength{\headboxwidth}{-\headloffset}
+
+\newlength{\headtoffset}
+\setlength{\headtoffset}{3truemm}
+
+\newlength{\headboxheight}
+\setlength{\headboxheight}{\myheadheight}
+\addtolength{\headboxheight}{\headtoffset}
+\newlength{\footboxheight}
+\setlength{\footboxheight}{\headboxheight}
+\addtolength{\footboxheight}{-1.5\baselineskip}
+\addtolength{\footboxheight}{3.5truemm}
+
+\newlength{\headroffset}
+\setlength{\headroffset}{\paperwidth}
+\addtolength{\headroffset}{-\myleftmargin}
+\addtolength{\headroffset}{3truemm}
+\addtolength{\headroffset}{-\headwidth}
+
+\newlength{\headboxwidthe}
+\setlength{\headboxwidthe}{\paperwidth}
+\addtolength{\headboxwidthe}{-\headroffset}
+\addtolength{\headboxwidthe}{4truemm}
+
+\newlength{\footboxwidth}
+\setlength{\footboxwidth}{\paperwidth}
+\addtolength{\footboxwidth}{4truemm}
+
+\newlength{\tumeoffset}
+\setlength{\tumeoffset}{56.25pt}
+\newlength{\tumeh}
+\setlength{\tumeh}{25pt}
+\addtolength{\tumeoffset}{-\tumeh}
+
+\makeatletter
+\fancypagestyle{plainhead}{%
+  \fancyhead{}
+  \fancyhead[O]{%
+    \ifnum\value{frontmainback}=1%
+      \ifnum\value{chapterflg}>2%
+	    \vspace*{-\headtoffset}\hspace*{-\headloffset}\colorbox{yuruyuriblack}{\hspace*{\headloffset}\vbox to\headboxheight{\hsize\headboxwidth\vspace*{\headtoffset}\vfil{\hspace*{-2truemm}\hfill{\gtfamily\sffamily\bfseries\upshape\rightmark}\hspace*{-1truemm}\hspace*{\headroffset}}\vfil}}%
+      \else
+        \vspace*{-\headtoffset}\hspace*{-\headloffset}\colorbox{yuruyuriblack}{\hspace*{\headloffset}\vbox to\headboxheight{\hsize\headboxwidth\vspace*{\headtoffset}\vfil{\hspace*{-2truemm}\hfill{}\hspace*{-1truemm}\hspace*{\headroffset}}\vfil}}\addtocounter{chapterflg}{1}%
+      \fi\fi}
+  \fancyhead[RO]{%
+    \if@mainmatter%
+      \begin{tikzpicture}\useasboundingbox (0,0) rectangle (0,0);\fill[yuruyuriblackblack] (18pt,-\tumeoffset) rectangle (36.5pt,-\tumeoffset-\tumeh);\end{tikzpicture}%
+    \fi}
+  \fancyhead[E]{%
+    \ifnum\value{frontmainback}=1%
+      \ifnum\value{chapterflg}>2%
+        \vspace*{-\headtoffset}\hspace*{-\headroffset}\colorbox{yuruyuriblack}{\hspace*{\headroffset}\vbox to\headboxheight{\hsize\headboxwidthe\vspace*{\headtoffset}\vfil{\hspace*{-2truemm}{\gtfamily\sffamily\bfseries\upshape\leftmark}\hfill\hspace*{-1truemm}\hspace*{\headloffset}}\vfil}}%
+      \else
+        \vspace*{-\headtoffset}\hspace*{-\headroffset}\colorbox{yuruyuriblack}{\hspace*{\headroffset}\vbox to\headboxheight{\hsize\headboxwidthe\vspace*{\headtoffset}\vfil{\hspace*{-2truemm}{}\hfill\hspace*{-1truemm}\hspace*{\headloffset}}\vfil}}\addtocounter{chapterflg}{1}%
+      \fi\fi}
+  \fancyhead[LE]{%
+    \if@mainmatter%
+      \begin{tikzpicture}\useasboundingbox (0,0) rectangle (0,0);\fill[yuruyuriblackblack] (-18pt,-\tumeoffset) rectangle (-36.5pt,-\tumeoffset-\tumeh);\end{tikzpicture}%
+    \fi}
+
+  \fancyfoot{}
+  \fancyfoot[LO]{\ifnum\c@page<5\vspace*{2.75truemm}\fi\vspace*{5.5truemm}\hspace*{-\headloffset}\ifnum\value{reverseflg}=1%
+    \colorbox{white}{\vbox to\footboxheight{\hsize\footboxwidth\mbox{}}}%
+  \else%
+    \colorbox{yuruyuriblack}{\vbox to\footboxheight{\hsize\footboxwidth\mbox{}}}%
+  \fi}
+  \fancyfoot[LE]{\ifnum\c@page<5\vspace*{2.75truemm}\fi\vspace*{5.5truemm}\hspace*{-\headroffset}\ifnum\value{reverseflg}=1%
+    \colorbox{white}{\vbox to\footboxheight{\hsize\footboxwidth\mbox{}}}%
+  \else%
+    \colorbox{yuruyuriblack}{\vbox to\footboxheight{\hsize\footboxwidth\mbox{}}}%
+  \fi}
+  \fancyfoot[C]{\ifnum\c@page<5\vspace*{2.75truemm}\fi\vspace*{5.5truemm}\ifnum\value{reverseflg}=1%
+    \colorbox{white}{\vbox to\footboxheight{\hsize10zw \vspace*{-3truemm} \vfil\thepage\vfil}}%
+  \else%
+    \colorbox{yuruyuriblack}{\vbox to\footboxheight{\hsize10zw\vspace*{-3truemm}\vfil\thepage\vfil}}%
+  \fi}
+  \renewcommand{\footrulewidth}{0pt}}
+\makeatother
+\pagestyle{plainhead}
+
+\newlength{\fullpagewidth}
+\setlength{\fullpagewidth}{\headwidth}
+\makeatletter
+\newlength{\chaproffset}
+\setlength{\chaproffset}{\marginparsep}
+\addtolength{\chaproffset}{\marginparwidth}
+\addtolength{\chaproffset}{\headroffset}
+\addtolength{\chaproffset}{0.1truemm}
+\newlength{\chapboxwidth}
+\setlength{\chapboxwidth}{\paperwidth}
+\addtolength{\chapboxwidth}{4.2truemm}
+\newlength{\chaproffseto}
+\setlength{\chaproffseto}{\myleftmargin}
+\addtolength{\chaproffseto}{3.1truemm}
+\newlength{\minipageoffset}
+
+\def\@makechapterhead#1{%
+  {\parindent=0pt \normalfont\Huge\headfont
+   {\vspace*{-10.5truemm}%
+    \ifnum\value{frontmainback}=2\vspace*{-\headboxheight}\vspace*{-2.1truemm}\else\vspace*{-\headboxheight}\vspace*{-2.2truemm}\ifnum\thechapter=1\vspace*{2.8truemm}\fi\fi%
+	\ifodd\c@page\hspace*{-\chaproffseto}\else\if@twoside\hspace*{-\chaproffset}\else\hspace*{-\chaproffseto}\fi\fi%
+    \colorbox{yuruyuriblack}{\vbox to4zw{\hsize\chapboxwidth{\vfill\ifodd\c@page%
+      \vspace*{3truemm}\hspace*{\chaproffseto}\hspace*{-2truemm}{\LARGE\headfont\@chapapp\thechapter\@chappos\hspace*{1zw}\authorname}\\\hspace*{\chaproffseto}\hspace*{-2truemm}{\scalebox{0.98}[1]{#1}}%
+    \else%
+	  \if@twoside%
+        \vspace*{3truemm}\hspace*{\myleftmargin}\hspace*{-4truemm}{\LARGE\headfont\@chapapp\thechapter\@chappos\hspace*{1zw}\authorname}\\\hspace*{\myleftmargin}\hspace*{-4truemm}{\scalebox{0.98}[1]{#1}}%
+	  \else%
+	    \vspace*{3truemm}\hspace*{\chaproffseto}\hspace*{-2truemm}{\LARGE\headfont\@chapapp\thechapter\@chappos\hspace*{1zw}\authorname}\\\hspace*{\chaproffseto}\hspace*{-2truemm}{\scalebox{0.98}[1]{#1}}%
+      \fi
+    \fi}\vfill}}}%
+    \par\nobreak
+    \vskip \Cvs}\setcounter{marginparcnt}{0}\setcounter{chapterflg}{0}\renewcommand{\authorname}{}\addtolength{\tumeoffset}{\tumeh}}
+
+%%\def\@makeschapterhead#1{\@makeschapterhead#1}
+\def\@makeschapterhead#1{%
+  {\parindent=0pt \normalfont\Huge\headfont
+   {\vspace*{-\headboxheight}\vspace*{-5.25truemm}%
+	\hspace*{-\myleftmargin}\hspace*{-6.35truemm}%
+    \colorbox{white}{\vbox to4zw{\hsize\chapboxwidth{\vspace*{3truemm}\vfill\hspace*{\myleftmargin}\hspace*{5truemm}#1}\vfill}}}%
+    \par\nobreak
+    \vskip \Cvs}\setcounter{marginparcnt}{0}\setcounter{chapterflg}{0}}
+
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}%
+  {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+  {.5\Cvs \@plus.3\Cdp}%
+  {\normalfont\Large\headfont
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (0,0);
+      %%\fill[yuruyuriblackblack] (0,-4pt) rectangle (4pt,13pt);
+	  %%\draw[yuruyuriblackblack,line width=0.8pt] (0pt,-4pt) -- (\textwidth,-4pt);
+	  \fill[yuruyuriblack] (0,-4pt) rectangle (\textwidth, 5.5pt);
+    \end{tikzpicture}%
+    \hspace{0.7zw}}}
+
+\renewcommand{\subsection}{%
+  \@startsection{subsection}{2}{\z@}%
+  {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+  {.5\Cvs \@plus.3\Cdp}%
+  {\normalfont\large\headfont
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (0,0);
+      \fill[yuruyuriblackblack] (0,-4pt) rectangle (4pt,11pt);
+    \end{tikzpicture}%
+    \hspace{0.8zw}}}
+
+\renewcommand{\subsubsection}{%
+  \@startsection{subsubsection}{3}{\z@}%
+  {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+  {\z@}%
+  {\normalfont\normalsize\headfont
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (0,0);
+      \fill[yuruyuriblack] (0,-3pt) rectangle (4pt,9pt);
+    \end{tikzpicture}%
+    \hspace{1zw}}}
+
+\renewenvironment{quotation}{%
+  \ifodd\c@page%
+    \setlength{\minipageoffset}{0pt}%
+  \else%
+    \if@twoside%
+      \setlength{\minipageoffset}{\marginparwidth}
+      \addtolength{\minipageoffset}{\marginparsep}
+    \else
+      \setlength{\minipageoffset}{0pt}
+    \fi
+  \fi\hspace*{-\minipageoffset}\hspace*{3.9zw}\begin{minipage}[]{40zw}%
+\parindent=1zw}{\end{minipage}\vspace*{\baselineskip}}
+
+\newenvironment{tabooular}{\renewcommand{\arraystretch}{1.25}}{}
+\newenvironment{tabooular*}{%
+  \checkoddpage
+  \ifoddpage
+    \setlength{\minipageoffset}{0pt}%
+  \else
+    \if@twoside
+      \setlength{\minipageoffset}{\marginparwidth}
+      \addtolength{\minipageoffset}{\marginparsep}
+    \else
+      \setlength{\minipageoffset}{0pt}
+    \fi
+  \fi\hspace*{-\minipageoffset}\begin{minipage}[]{\fullpagewidth}
+  %%\@ifundefined{r@#1}{\newcommand{\tmpcnt}{0}}{\newcommand{\tmpcnt}{\pageref{#1}\relax}}
+  %%\ifodd\tmpcnt%
+  %%  \newcommand{\tmptmp}{ODD~\tmpcnt~DESU}
+  %%\else
+  %%  \newcommand{\tmptmp}{EVEN~\tmpcnt~DESU}
+  %%\fi
+  %%HAI~#1~\tmpcnt~KOREMAJI~\tmptmp
+  \renewcommand{\arraystretch}{1.25}}{\end{minipage}}
+
+\newenvironment{reviewimage*}{%
+  \begin{figure}[!htbp]
+  \checkoddpage
+  \ifoddpage
+    \setlength{\minipageoffset}{0pt}%
+  \else
+    \if@twoside
+      \setlength{\minipageoffset}{\marginparwidth}
+      \addtolength{\minipageoffset}{\marginparsep}
+    \else
+      \setlength{\minipageoffset}{0pt}
+    \fi
+  \fi\hspace*{-\minipageoffset}\begin{minipage}[]{\fullpagewidth}\centering}{%
+  \end{minipage}\end{figure}}
+\makeatother
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\providecommand{\toprule}{\hline\hline}
+\providecommand{\midrule}{\hline}
+\providecommand{\bottomrule}{\hline}
+
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}\renewcommand{\dbltopfraction}{1.0}
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\floatpagefraction}{1.0}
+\renewcommand{\dblfloatpagefraction}{1.0}
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+
+\makeatletter
+\def\@endpart{\vfil\newpage
+%  \if@twoside
+%    \null
+%    \thispagestyle{empty}%
+%    \newpage
+%  \fi
+  \if@restonecol
+    \twocolumn
+  \fi}
+
+\def\mainmatter{%
+  \clearpage
+  \@mainmattertrue
+  \pagenumbering{arabic}}
+\makeatother
+
+\newenvironment{shadedb}{%
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{shadecolorb}}%
+  \MakeFramed {\FrameRestore}}%
+ {\endMakeFramed}
+
+<%- unless ["utbook", "tbook"].include?(@documentclass)  -%>
+%%\usepackage[dvipdfm,top=28truemm,bottom=21truemm,left=24truemm,right=18truemm]{geometry}
+<%- end -%>
+
+\newcommand{\parasep}{\vspace*{3zh}}
+%%\setlength{\footskip}{30pt}
+
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[dvipdfmx,bookmarks=true,bookmarksnumbered=true,hidelinks,%
+            pdftitle={<%= escape_latex(@config.name_of("booktitle")) %>},%
+            pdfauthor={<%= escape_latex(@config.names_of("aut").join(I18n.t("names_splitter"))) %>}]{hyperref}
+\usepackage[dvipdfmx]{pxjahyper}
+\urlstyle{same}
+%%\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks
+%%      \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j
+%%      \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t
+%%      \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D
+%%      \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N
+%%      \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X
+%%      \do\Y\do\Z\do\*\do\-\do\~\do\'\do\"\do\/\do:}
+
+
+<%- if ["utbook", "tbook"].include?(@documentclass)  -%>
+\newcommand{\headfont}{\gtfamily\sffamily\bfseries}
+\usepackage{plext}
+<%- end -%>
+
+<%- if config["highlight"] && config["highlight"]["latex"] == "listings" -%>
+<%-   if config["language"] == "ja" -%>
+\usepackage{listings,jlisting}
+<%-   else -%>
+\usepackage{listings}
+<%-   end -%>
+\renewcommand{\lstlistingname}{<%= escape_latex(I18n.t("list")) %>}
+\lstset{%
+  breaklines=true,%
+  breakautoindent=false,%
+  breakindent=0pt,%
+  fontadjust=true,%
+  backgroundcolor=\color{shadecolor},%
+  frame=single,%
+  framerule=0pt,%
+  basicstyle=\ttfamily\scriptsize,%
+  commentstyle=\color{reviewgreen},%
+  identifierstyle=\color{reviewblue},%
+  stringstyle=\color{reviewred},%
+  keywordstyle=\bfseries\color{reviewdarkred},%
+}
+
+\lstnewenvironment{reviewemlistlst}[1][]{\lstset{#1}}{}
+\lstnewenvironment{reviewemlistnumlst}[1][]{\lstset{numbers=left, #1}}{}
+\lstnewenvironment{reviewlistlst}[1][]{\lstset{#1}}{}
+\lstnewenvironment{reviewlistnumlst}[1][]{\lstset{numbers=left, #1}}{}
+\lstnewenvironment{reviewcmdlst}[1][]{\lstset{backgroundcolor=\color{white}, frameround=tttt, frame=trbl, #1}}{}
+<%- end -%>
+
+\newenvironment{reviewimage}{%
+  \begin{figure}[!htbp]
+    \centering}{%
+  \end{figure}}
+
+\newenvironment{reviewdummyimage}{%
+  \begin{figure}[!htbp]
+    \centering\begin{alltt}}{%
+    \end{alltt}
+  \end{figure}}
+
+\newenvironment{reviewemlist}{%
+  \def\boxwidth{\columnwidth}%
+  \advance \boxwidth by -2\FrameSep%
+  \vspace*{-0.75\FrameSep}\begin{center}\begin{minipage}{\boxwidth}%
+  \medskip\small\begin{shaded}\setlength{\baselineskip}{1.3zw}\begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shaded}\end{minipage}\end{center}}
+
+\newenvironment{reviewlist}{%
+  \def\boxwidth{\columnwidth}%
+  \advance \boxwidth by -2\FrameSep%
+  \vspace*{-0.75\FrameSep}\begin{center}\begin{minipage}{\boxwidth}%
+  \begin{shaded}\small\setlength{\baselineskip}{1.3zw}\begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shaded}\end{minipage}\end{center}\par}
+
+\newenvironment{reviewcmd}{%
+  \def\boxwidth{\columnwidth}%
+  \advance \boxwidth by -2\FrameSep%
+  \vspace*{-0.75\FrameSep}\begin{center}\begin{minipage}{\boxwidth}%
+  \color{white}\medskip\small\begin{shadedb}\setlength{\baselineskip}{1.3zw}%
+  \begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shadedb}\end{minipage}\end{center}}
+
+\newenvironment{reviewemlist*}{%
+  \def\boxwidth{\fullpagewidth}%
+  \advance \boxwidth by -\marginparsep%
+  \checkoddpage%
+  \ifoddpage%
+    \setlength{\minipageoffset}{0pt}%
+  \else%
+    <%= ENV['ONESIDE'] ? '\iffalse' : '\iftrue' %>
+      \setlength{\minipageoffset}{\marginparwidth}\addtolength{\minipageoffset}{\marginparsep}%
+    \else%
+	  \setlength{\minipageoffset}{0pt}%
+    \fi%
+  \fi\hspace*{-\minipageoffset}%
+  \centering\begin{minipage}{\boxwidth}%
+  \medskip\small\begin{shaded}\setlength{\baselineskip}{1.3zw}\begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shaded}\end{minipage}\vspace*{0.5\baselineskip}}
+
+\newenvironment{reviewlist*}{%
+  \def\boxwidth{\fullpagewidth}%
+  \advance \boxwidth by -\marginparsep%
+  \checkoddpage%
+  \ifoddpage%
+    \setlength{\minipageoffset}{0pt}%
+  \else%
+    <%= ENV['ONESIDE'] ? '\iffalse' : '\iftrue' %>
+      \setlength{\minipageoffset}{\marginparwidth}%
+      \addtolength{\minipageoffset}{\marginparsep}%
+    \else%
+	  \setlength{\minipageoffset}{0pt}%
+    \fi
+  \fi\hspace*{-\minipageoffset}%
+  \centering\begin{minipage}{\boxwidth}%
+  \begin{shaded}\small\setlength{\baselineskip}{1.3zw}\begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shaded}\end{minipage}\vspace*{0.5\baselineskip}\par}
+
+%% ちょっと配置がおかしかも。emlistでおかしくなったときに似ているので参考にする
+\newenvironment{reviewcmd*}{%
+  \def\boxwidth{\fullpagewidth}%
+  \advance \boxwidth by -\marginparsep%
+  \checkoddpage%
+  \ifoddpage%
+    \setlength{\minipageoffset}{0pt}%
+  \else%
+    <%= ENV['ONESIDE'] ? '\iffalse' : '\iftrue' %>
+      \setlength{\minipageoffset}{\marginparwidth}%
+      \addtolength{\minipageoffset}{\marginparsep}%
+    \else%
+	  \setlength{\minipageoffset}{0pt}%
+    \fi
+  \fi\hspace*{-\minipageoffset}%
+  \centering\begin{minipage}{\boxwidth}%
+  \color{white}\medskip\small\begin{shadedb}\setlength{\baselineskip}{1.3zw}%
+  \begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{shadedb}\end{minipage}\vspace*{0.5\baselineskip}}
+
+\newenvironment{reviewbox}{%
+  \def\boxwidth{\columnwidth}%
+  \advance \boxwidth by -2\FrameSep%
+  \vspace*{-0.75\FrameSep}\begin{center}\begin{minipage}{\boxwidth}%
+  \medskip\small\begin{framed}\setlength{\baselineskip}{1.3zw}\begin{alltt}}{%
+  \end{alltt}\vspace*{-\FrameSep}\end{framed}\end{minipage}\end{center}}
+
+\newenvironment{reviewtable}[1]{%
+  \small\setlength{\baselineskip}{1.5zw}
+  \renewcommand\arraystretch{1.5}
+    \begin{tabular}{#1}}{%
+    \end{tabular}}
+
+\newenvironment{reviewcolumn}{%
+     \begin{framed}
+   }{%
+      \end{framed}
+   }
+
+\newcommand{\reviewcolumnhead}[2]{%
+{\noindent\large <%= escape_latex(I18n.t("column_head")) %>: #2}}
+
+\newcommand{\reviewtablecaption}[1]{%
+  \caption{#1}}
+
+\newcommand{\reviewimgtablecaption}[1]{%
+  \caption{#1}\vspace{-3mm}}
+
+\newcommand{\reviewbackslash}[0]{%
+  \textbackslash{}}
+
+\newcommand{\reviewlistcaption}[1]{%
+  \medskip{\small\noindent #1}\vspace*{0.5zw}}
+
+\newcommand{\reviewemlistcaption}[1]{%
+  \medskip{\small\noindent #1}\vspace*{0zw}}
+
+\newcommand{\reviewcmdcaption}[1]{%
+  \medskip{\small\noindent #1}\vspace*{-0.1zw}}
+
+\newcommand{\reviewindepimagecaption}[1]{%
+  \begin{center}#1\end{center}}
+
+\newcommand{\reviewboxcaption}[1]{%
+  \medskip{\small\noindent #1}\vspace*{0zw}}
+
+\newcommand{\reviewimageref}[2]{<%= escape_latex(I18n.t("image")) %>\nobreak#1}
+\newcommand{\reviewtableref}[2]{<%= escape_latex(I18n.t("table")) %>\nobreak#1}
+\newcommand{\reviewlistref}[1]{<%= escape_latex(I18n.t("list")) %>\nobreak#1}
+\newcommand{\reviewbibref}[2]{#1}
+\newcommand{\reviewcolumnref}[2]{<%= escape_latex(I18n.t("columnname")) %>\nobreak#1}
+\newcommand{\reviewsecref}[2]{#1}
+
+\newcommand{\reviewminicolumntitle}[1]{%
+  {\large <%= escape_latex(I18n.t("memo_head")) %>: #1}\\}
+
+<%- if @config["toctitle"].present? -%>
+\renewcommand{\contentsname}{<%= escape_latex(@config["toctitle"]) %>}
+<%- elsif I18n.t("toctitle") -%>
+\renewcommand{\contentsname}{<%= escape_latex(I18n.t("toctitle")) %>}
+<%- end -%>
+
+\newenvironment{reviewminicolumn}{%
+  \vspace{1.5zw}\begin{screen}}{%
+  \end{screen}\vspace{2zw}}
+
+\newcommand{\reviewkw}[1]{\textbf{\textgt{#1}}}
+\newcommand{\reviewami}[1]{\mask{#1}{A}}
+\newcommand{\reviewem}[1]{\textbf{#1}}
+\newcommand{\reviewstrong}[1]{\textbf{#1}}
+\newcommand{\reviewunderline}{\Underline}
+
+%% @<del> is ignored in LaTeX with default style
+\newcommand{\reviewstrike}[1]{#1}
+
+%%%% for ulem.sty:
+%%\renewcommand{\reviewstrike}[1]{\sout{#1}}
+%%
+%%%% for jumoline.sty:
+%%\renewcommand{\reviewstrike}[1]{\Middleline{#1}}
+
+\newcommand{\reviewth}[1]{\textgt{#1}}
+\newcommand{\reviewtitlefont}[0]{\usefont{T1}{phv}{b}{n}\gtfamily}
+\newcommand{\reviewmainfont}[0]{}
+\newcommand{\reviewcolophon}[0]{\clearpage}
+\newcommand{\reviewappendix}[0]{\appendix}
+
+\newcommand{\reviewprepartname}{<%= escape_latex(@locale_latex["prepartname"]) %>}
+\newcommand{\reviewpostpartname}{<%= escape_latex(@locale_latex["postpartname"]) %>}
+\newcommand{\reviewprechaptername}{<%= escape_latex(@locale_latex["prechaptername"]) %>}
+\newcommand{\reviewpostchaptername}{<%= escape_latex(@locale_latex["postchaptername"]) %>}
+\newcommand{\reviewfigurename}{<%= escape_latex(I18n.t("image")) %>}
+\newcommand{\reviewtablename}{<%= escape_latex(I18n.t("table")) %>}
+\newcommand{\reviewappendixname}{<%= escape_latex(@locale_latex["preappendixname"]) %>}
+\ifdefined\prepartname
+  \renewcommand{\prepartname}{\reviewprepartname}
+\fi
+\ifdefined\postpartname
+  \renewcommand{\postpartname}{\reviewpostpartname}
+\fi
+\ifdefined\prechaptername
+  \renewcommand{\prechaptername}{\reviewprechaptername}
+\fi
+\ifdefined\postchaptername
+  \renewcommand{\postchaptername}{\reviewpostchaptername}
+\fi
+\ifdefined\figurename
+  \renewcommand{\figurename}{\reviewfigurename}
+\fi
+\ifdefined\tablename
+  \renewcommand{\tablename}{\reviewtablename}
+\fi
+\ifdefined\appendixname
+  \renewcommand{\appendixname}{\reviewappendixname}
+\fi
+
+\makeatletter
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\def\maxwidth{%
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+<%- if @config["usepackage"] -%>
+<%= @config["usepackage"] %>
+<%- end -%>
+
+\begin{document}
+\reviewmainfont
+\frontmatter
+\pagenumbering{arabic}
+
+<%- if @config["titlepage"] -%>
+<%-   if @custom_titlepage -%>
+<%= @custom_titlepage %>
+<%-   else -%>
+\begin{titlepage}
+<%-     if @config["coverimage"] -%>
+  \begin{center}
+    \includegraphics[<%= @coverimageoption%>]{./images/<%= @config["coverimage"] %>}
+  \end{center}
+  \clearpage
+<%-     end -%>
+%%\thispagestyle{empty}
+\begin{center}%
+  \mbox{} \vskip5zw
+   \reviewtitlefont%
+    {\Huge <%= escape_latex(@config.name_of("booktitle")) %> \par}%
+    \vskip 15em%
+    {\huge
+      \lineskip .75em
+      \begin{tabular}[t]{c}%
+        <%= @authors %>
+      \end{tabular}\par}%
+    \vfill
+    {\large <%= escape_latex(@config["date"].to_s) %> <%= escape_latex(I18n.t("edition")) %>\hspace{2zw}<%= escape_latex(I18n.t("published_by", @config.names_of("prt").join(I18n.t("names_splitter")))) %>\par}%
+\vskip4zw\mbox{}
+  \end{center}%
+\end{titlepage}
+<%-   end -%>
+<%- end -%>
+
+%%\renewcommand{\chaptermark}[1]{{}}
+\frontmatter
+\pagenumbering{arabic}
+
+%%% originaltitle
+<%- if @config["originaltitlefile"] -%>
+<%= @custom_originaltitlepage %>
+<%- end -%>
+
+%%% credit
+<%- if @config["creditfile"] -%>
+<%= @custom_creditpage %>
+<%- end -%>
+
+%% preface
+\setcounter{page}{3}
+<%= @input_files["PREDEF"] %>
+
+<%- if @config["toc"] -%>
+\setcounter{tocdepth}{<%= @config["toclevel"] %>}
+\setcounter{reverseflg}{1}
+\addtolength{\fullpagewidth}{-\marginparsep}
+\begin{minipage}[]{\fullpagewidth}
+\pagecolor{yuruyuriblack}
+{\fontsize{9.5pt}{11.5pt} \tableofcontents}
+\end{minipage}
+\addtolength{\fullpagewidth}{\marginparsep}
+<%- end -%>
+
+% https://gist.github.com/kassy-kz/a00ce3afb94b9ea4ff8a
+\begingroup
+%  \cleardoublepage
+  \clearpage
+  \edef\continuenumber{\endgroup
+    \noexpand\mainmatter
+    \setcounter{page}{\the\value{page}}%
+  }
+
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter~#1}{}}
+\mainmatter
+\pagecolor{white}
+\setcounter{reverseflg}{0}
+\addtocounter{frontmainback}{1}
+\continuenumber
+
+<%  @input_files["CHAPS"].each do |chap| %>
+\afterpage{\clearpage}
+<%= chap.strip %>
+<% end %>
+\renewcommand{\chaptermark}[1]{\markboth{\appendixname\thechapter~#1}{}}
+\reviewappendix
+<%= @input_files["APPENDIX"] %>
+
+%% backmatter begins
+<%- if @input_files["POSTDEF"] or @config["colophon"] -%>
+\backmatter
+<%- end -%>
+\addtocounter{frontmainback}{1}
+%%\pagestyle{plain}
+%%\thispagestyle{plain}
+
+<%- if @input_files["POSTDEF"] -%>
+<%= @input_files["POSTDEF"] %>
+<%- end -%>
+
+%%% profile
+<%- if @config["profile"] -%>
+<%= @custom_profilepage %>
+<%- end -%>
+
+%%% advfile
+<%- if @config["advfile"] -%>
+<%= @custom_advfilepage %>
+<%- end -%>
+
+%%% colophon
+<%- if @config["colophon"] -%>
+<%-   if @custom_colophonpage -%>
+<%= @custom_colophonpage %>
+<%-   else -%>
+%% okuduke
+\reviewcolophon
+%%\thispagestyle{empty}
+
+\makeatletter
+\ifodd\c@page
+  \setlength{\minipageoffset}{0pt}
+\else
+  \if@twoside
+    \setlength{\minipageoffset}{\marginparwidth}
+    \addtolength{\minipageoffset}{\marginparsep}
+  \else
+    \setlength{\minipageoffset}{0pt}
+  \fi
+\fi
+\makeatother
+\setcounter{reverseflg}{1}
+\pagecolor{yuruyuriblack}
+\vspace*{\fill}
+\hspace*{-\minipageoffset}
+{\noindent\reviewtitlefont\Large <%= escape_latex(@config.name_of("booktitle")) %>} \\
+\hspace*{-\minipageoffset}\rule[0pt]{\fullpagewidth}{1pt}
+\hspace*{-\minipageoffset}\begin{minipage}[]{\fullpagewidth}
+\vspace*{1zw}
+\begin{center}
+\begin{tabular}{ll}
+{\bfseries 発行日} & \textgt{<%= escape_latex(Date.parse(@config["date"]).strftime("%Y年%-m月%-d日")) %>} \\
+{\bfseries 発　行} & \textgt{<%= escape_latex(@config["pbl"].to_s) %>}	\\
+                   & \url{<%= @config["oth"].to_s %>}	\\
+{\bfseries 連絡先} & \textgt{<%= escape_latex(@config["edt"].to_s) %>}	\\
+{\bfseries 印刷所} & \textgt{<%= ENV['ONESIDE'] ? '電子版につき空欄' : escape_latex(@config["prt"].to_s) %>}	\\
+\end{tabular}
+\end{center}
+\vspace*{0.25zw}
+\end{minipage}
+\hspace*{-\minipageoffset}\rule[0pt]{\fullpagewidth}{1pt} \\
+<%-     if @config["rights"] -%>
+<%= @config.names_of("rights").map{|s| escape_latex(s)}.join('\\' + '\\') %> \\
+<%-     end -%>
+<%-   end -%>
+<%- end -%>
+
+%%% backcover
+<%- if @config["backcover"] -%>
+<%= @custom_backcoverpage %>
+<%- end -%>
+\end{document}

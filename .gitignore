@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+~*
+.*.swp
+/src/images/html
+/src/images/latex
+/tmp
+/src/tmp
+/src/book-epub
+/src/book-pdf
+/src/images.bak
