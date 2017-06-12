@@ -1,0 +1,20 @@
+general:
+  branches:
+    only:
+      - master
+  artifacts:
+    - tmp/body.pdf
+    - tmp/origin.pdf
+    - tmp/book.pdf
+    - tmp/book.epub
+
+machine:
+  services:
+    - docker
+  environment:
+    CONTAINER_VERSION: c3
+    BUILD_SKIP: 0
+
+test:
+  override:
+    - ./make.sh build
