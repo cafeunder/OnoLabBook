@@ -1,9 +1,6 @@
-# L0 Vol.2
+# おのけん本
 ## 執筆方法
-* https://sigcoww.herokuapp.com/howto.html
 * https://github.com/kmuto/review/blob/master/doc/format.ja.md
-* https://github.com/SIGCOWW/L0-2/tree/master/src/articles
-  * https://github.com/SIGCOWW/L0-2/blob/master/artifacts/book.pdf
 
 ```
 $ git clone https://github.com/SIGCOWW/l0-2.git
