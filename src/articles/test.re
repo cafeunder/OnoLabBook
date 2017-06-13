@@ -64,8 +64,6 @@ LaTeXの数式をそのまま出す。
 x & = 1 \\
 y & = 1 + 2 + 3
 //}
-EPUB版は未完成です@<fn>{death}。
-//footnote[death][59%くらいの完成度。入稿後に修正。]
 
 ちなみにこれが標準@<tt>{texequation}です。
 //texequation{
