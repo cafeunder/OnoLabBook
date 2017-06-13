@@ -11,7 +11,6 @@ http://paiza.hatenablog.com/entry/docker_intro
 $ git clone https://github.com/cafeunder/OnoLabBook
 $ cd OnoLabBook
 $ ./make.sh install [article-name]
-$ vim src/articles/[article-name]
 $ ./make.sh build
 ```
 
