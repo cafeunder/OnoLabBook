@@ -1,4 +1,9 @@
 # おのけん本
+## 環境
+記事のビルドにはdockerが必要です。  
+dockerの説明は以下のサイトを参考にしてください。  
+http://paiza.hatenablog.com/entry/docker_intro
+
 ## 執筆方法
 * https://github.com/kmuto/review/blob/master/doc/format.ja.md
 
