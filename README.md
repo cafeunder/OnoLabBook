@@ -3,15 +3,11 @@
 * https://github.com/kmuto/review/blob/master/doc/format.ja.md
 
 ```
-$ git clone https://github.com/SIGCOWW/l0-2.git
-$ cd l0-2/
-$ ./make.sh install kakuyo
-$ vim src/articles/kakuyo.re
-$ # ./make.sh build ... 実行結果は tmp/ に書かれる
-$ git add -A
-$ # git commit -m "[ci skip] test"
-$ git commit -m "TEST"
-$ git push origin master
+$ git clone https://github.com/cafeunder/OnoLabBook
+$ cd OnoLabBook
+$ ./make.sh install [article-name]
+$ vim src/articles/[article-name]
+$ ./make.sh build ... 実行結果は tmp/ に書かれる
 ```
 
 
