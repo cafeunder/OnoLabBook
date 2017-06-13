@@ -10,6 +10,7 @@ $ vim src/articles/[article-name]
 $ ./make.sh build ... 実行結果は tmp/ に書かれる
 ```
 
+※[article-name] は記事の名前を入力してください
 
 ## ディレクトリ配置
 ```
