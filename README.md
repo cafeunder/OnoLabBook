@@ -15,7 +15,8 @@ $ vim src/articles/[article-name]
 $ ./make.sh build ... 実行結果は tmp/ に書かれる
 ```
 
-※[article-name] は記事の名前を入力してください
+※[article-name] は記事の名前を入力してください。  
+※記事を書くときは、各自ブランチを切って作業してください。  
 
 ## ディレクトリ配置
 ```
