@@ -12,11 +12,12 @@ $ git clone https://github.com/cafeunder/OnoLabBook
 $ cd OnoLabBook
 $ ./make.sh install [article-name]
 $ vim src/articles/[article-name]
-$ ./make.sh build ... 実行結果は tmp/ に書かれる
+$ ./make.sh build
 ```
 
 ※[article-name] は記事の名前を入力してください。  
-※記事を書くときは、各自ブランチを切って作業してください。  
+※記事を書くときは、各自ブランチを切って作業してください。  
+※ビルド結果は、OnoLabBook/tmp/に出力されます。
 
 ## ディレクトリ配置
 ```
