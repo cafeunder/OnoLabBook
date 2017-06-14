@@ -82,13 +82,19 @@ y & = 1 + 2 + 3
 
 それっぽい式も書けます．
 //demathraw{
-C_1 = {\bm m}m + z_1 e_1 + \sum^{n}_{k=2} z_k e_k.
+C_1 = {\bm m} + z_1 e_1 + \sum^{n}_{k=2} z_k e_k.
 //}
 
-== 画像の配置
+== 画像の表示
+=== 画像ファイルの配置場所
+画像は，OnoLabBook/src/images/[記事名]/に配置します．
+
 === @<tt>{image}ブロック
+図の表示方法を@<img>{pdfimage}と@<img>{pngimage}に示します．
+表の参照は@<img>{pdfimage}とします．
 
+//image[pdfimage][画像1][scale=0.5]
+//image[pngimage][画像2][scale=0.5]
 
-//image[pdfimage][はい画像][scale=0.5]
-//image[pngimage][はい画像2][scale=0.5]
-//image[exifjpg][はい画像3][scale=0.5]
+@<b>{画像を横に並べる(minipage的な)ことは出来ません．}
+画像を横並びにしたいならば，inkscapeやpowerpointを使って横並びの画像を作ってください．
