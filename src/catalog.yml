@@ -1,5 +1,5 @@
 CHAPS:
-  - test.re
+  - 5000.re
 
 POSTDEF:
   - profile.re
