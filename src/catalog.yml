@@ -1,5 +1,6 @@
 CHAPS:
   - 5000.re
+  - bib.re
 
 POSTDEF:
   - profile.re
