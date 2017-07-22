@@ -1,4 +1,9 @@
 # おのけん本
+## 環境
+記事のビルドにはdockerが必要です。  
+dockerの説明は以下のサイトを参考にしてください。  
+http://paiza.hatenablog.com/entry/docker_intro
+
 ## 執筆方法
 * https://github.com/kmuto/review/blob/master/doc/format.ja.md
 
@@ -6,11 +11,12 @@
 $ git clone https://github.com/cafeunder/OnoLabBook
 $ cd OnoLabBook
 $ ./make.sh install [article-name]
-$ vim src/articles/[article-name]
-$ ./make.sh build ... 実行結果は tmp/ に書かれる
+$ ./make.sh build
 ```
 
-※[article-name] は記事の名前を入力してください
+※[article-name] は記事の名前を入力してください。  
+※記事を書くときは、各自ブランチを切って作業してください。  
+※ビルド結果は、OnoLabBook/tmp/に出力されます。  
 
 ## ディレクトリ配置
 ```
