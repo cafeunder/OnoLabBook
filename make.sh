@@ -133,7 +133,7 @@ EOF
 
 	# catalog.yml
 	if [ "$(grep -c "${1}.re" catalog.yml)" -eq 0 ]; then
-		gsed -i "s/^CHAPS:$/CHAPS:\n  - ${1}.re/" catalog.yml
+		sed -i "s/^CHAPS:$/CHAPS:\n  - ${1}.re/" catalog.yml
 	fi
 
 	# src/images
