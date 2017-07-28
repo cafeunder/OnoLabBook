@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 = ┌（┌ ＾p＾）┐
 //lead{
 nintendo switch，スプラトゥーン2が運よく手に入ってしまったがために，進捗を生み出せないものと化したあこんぼです．
@@ -115,4 +116,22 @@ Diederik P.Kingma, Jimmy Lei Ba, Adam : A Method for Stochastic Optimization, 3r
 
 [Wierstra, 2008]
 Daan Wierstra, Tom Schaul, Jan Peters and Juergen Schmidhuber, Natural Evolution Strategies, 2008 IEEE Congress on Evolutionary Computation (CEC 2008)
+=======
+= homoo
+//lead{
+こんちは
+//}
+
+== ほげほげ
+//demathraw{
+\sum_{n = 1}^N f(n) \\ 
+\epsilon \\ 
+\theta = \theta + \eta F^{-1}(\theta) J(\theta)
+//}
+
+@<img>{test/test}と@<img>{test}はちゃんと表示されるかな？？？
+
+//image[test/test][画像A][scale=1.0]
+//image[test][画像B][scale=1.0]
+>>>>>>> c39b4119a8fd5cfb1fc55df4d7d9ad775fddac35
 
