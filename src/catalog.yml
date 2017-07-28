@@ -1,6 +1,6 @@
 CHAPS:
   - homoo.re
-  - test.re
+  - bib.re
 
 POSTDEF:
   - profile.re
