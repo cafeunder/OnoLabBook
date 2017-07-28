@@ -1,10 +1,6 @@
 CHAPS:
   - homoo.re
-<<<<<<< HEAD
   - bib.re
-=======
-  - test.re
->>>>>>> c39b4119a8fd5cfb1fc55df4d7d9ad775fddac35
 
 POSTDEF:
   - profile.re
