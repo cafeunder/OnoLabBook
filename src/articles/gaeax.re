@@ -301,7 +301,7 @@ GA-EAX | 5,853,137 & 3
 またの機会があれば，上記のテーマで筆を取らせて頂きたいと思います．
 ここまで読んでくださってありがとうございました．
 
-== mk39393配布先
+=== mk39393配布先
 インスタンスファイル，最良経路ファイル，最良経路の画像をGitHubで公開しています@<fn>{fn_mk}．
 ご興味のある方はどうぞ．
 //footnote[fn_mk][@<href>{https://github.com/cafeunder/TSPToolKit/tree/master/mk39393}]
