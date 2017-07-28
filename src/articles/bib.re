@@ -1,4 +1,4 @@
-== 参考文献
+= 参考文献
 
 //bibpaper[Koza][Koza, 1992]{
 Koza, John R.
