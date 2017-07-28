@@ -1,8 +1,8 @@
 CHAPS:
   - 5000.re
   - gaeax.re
-  - test.re
   - ar_nomura.re
+  - test.re
   - bib.re
 
 POSTDEF:
