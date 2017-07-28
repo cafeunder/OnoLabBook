@@ -1,6 +1,8 @@
 CHAPS:
   - gaeax.re
   - test.re
+  - ar_nomura.re
+  - bib.re
 
 POSTDEF:
   - profile.re
