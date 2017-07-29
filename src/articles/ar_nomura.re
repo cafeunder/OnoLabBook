@@ -274,6 +274,12 @@ BO，CMA-ESともにいい手法であるが，
 
  * Deep Learningのハイパーパラメータ最適化への適用
 
+=== Source Code
+今回の実験で用いたSource CodeをGithub@<fn>{github_nomura}に公開している．
+ベイズ最適化，CMA-ESどちらも非常にシンプルに書いてあるので，
+興味のある方は是非参照していただきたい．
+//footnote[github_nomura][https://github.com/ RosenblockChainers/bayes_vs_cma]
+
 //image[bo_sphere_pdf][Sphere関数に対するBOの探索描画．星が最適解，点が解を表す．(左上)初期点のみで評価回数5， (右上)評価回数10，(左下)評価回数16，(右下)評価回数30．][scale=0.9]
 //image[cma_sphere_pdf][Sphere関数に対するCMA-ESの探索描画．星が最適解，点が解を表す．(左上)評価回数6， (右上)評価回数18，(左下)評価回数36，(右下)評価回数48．][scale=0.9]
 //image[bo_himmelblau_pdf][Himmelblau関数に対するBOの探索描画．星が最適解，点が解を表す．(左上)初期点のみで評価回数5， (右上)評価回数11，(左下)評価回数20，(右下)評価回数45．][scale=0.9]
