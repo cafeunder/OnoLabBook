@@ -56,7 +56,3 @@ Adam : A Method for Stochastic Optimization, 3rd International Conference for Le
 //bibpaper[nes][Daan Wierstra, Tom Schaul, Jan Peters and Juergen Schmidhuber：]{
 Natural Evolution Strategies, 2008 IEEE Congress on Evolutionary Computation (CEC 2008)
 //}
-
-//bibpaper[bibun][石塚 陽：]{
-微分不可能関数への招待, 計測と制御 第37巻 第11号 1998年11月 号 
-//}
