@@ -304,7 +304,7 @@ GA-EAX | 5,853,137 & 7
 === mk39393配布先
 インスタンスファイル，最良経路ファイル，最良経路の画像をGitHubで公開しています@<fn>{fn_mk}．
 ご興味のある方はどうぞ．
-//footnote[fn_mk][@<href>{https://github.com/cafeunder/TSPToolKit/tree/master/mk39393}]
+//footnote[fn_mk][@<href>{https://github.com/RosenblockChainers/TravelingSalesmanProblem}]
 
 既知最良解は随時更新していきます．
 もし，公開中のものより経路長が短くなる解が得られた場合は，
